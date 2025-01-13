@@ -28,9 +28,4 @@ export default class TodoController {
   getAllProjects() {
     return this.project_array;
   }
-
-  //functions I want in this controller
-  // 1. Store each project
-  // 2. Store each todo
-  // 3. Call all of their functions
 }
