@@ -5,29 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
 </head>
-<body>
-  <h1>Get it Done</h1>
-  <nav>
-    <p>Button to create new project</p>
-  </nav>
-  <div id="container">
-    <div class="project-form">
-      <h2>Create New Project</h2>
-      <form id="new-project-form">
-        <input type="text" id="project-title" placeholder="Project Title" required>
-        <textarea id="project-description" placeholder="Description"></textarea>
-        <input type="date" id="project-due-date">
-        <select id="project-priority">
-          <option value="urgent">Urgent</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">low</option>
-        </select>
-        <button type="submit">Create Project</button>
-      </form>
+  <body>
+    <h1>Get it Done</h1>
+    <nav>
+      <p>Button to create new project</p>
+    </nav>
+    <div id="container">
+      <div class="project-form">
+        <h2>Create New Project</h2>
+        <form id="new-project-form">
+          <input type="text" id="project-title" name="project-title" placeholder="Project Title" required>
+          <button type="submit">Create Project</button>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="projects-container">
-  </div>
-</body>
+    <div class="projects-container">
+      <!-- Projects will be rendered here -->
+    </div>
+  </body>
 </html>

@@ -7,8 +7,8 @@ export default class TodoController {
     this.project_array = [];
   }
 
-  createProject(title, description, dueDate, priority) {
-    const newProject = new Project(title, description, dueDate, priority);
+  createProject(title) {
+    const newProject = new Project(title);
     this.project_array.push(newProject);
     return newProject;
   }

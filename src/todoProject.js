@@ -1,7 +1,7 @@
 import TodoBase from './todoBase.js';
 export default class Project extends TodoBase {
-  constructor(title, description, dueDate, priority, todoList = []) {
-    super(title, description, dueDate, priority);
+  constructor(title, todoList = []) {
+    super(title);
     this.todoList = todoList;
   }
 

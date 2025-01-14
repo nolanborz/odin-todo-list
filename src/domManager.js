@@ -11,16 +11,12 @@ export default class DOMManager {
       e.preventDefault();
 
       const title = document.getElementById('project-title').value;
-      const description = document.getElementById('project-description').value;
-      const dueDate = document.getElementById('project-due-date').value;
-      const priority = document.getElementById('project-priority').value;
 
-      const newProject = this.todoController.createProject(title, description, dueDate, priority);
-      this.renderAllProjects(); // Render all projects instead of just the new one
+      const newProject = this.todoController.createProject(title);
+      this.renderAllProjects();
       this.projectForm.reset();
     });
 
-    // Add event delegation for project container
     this.projectsContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('add-task-btn')) {
         const projectElement = e.target.closest('.project');
@@ -63,11 +59,8 @@ export default class DOMManager {
       const project = this.todoController.getProject(projectIndex);
 
       const title = taskForm.querySelector('.task-title').value;
-      const description = taskForm.querySelector('.task-description').value;
-      const dueDate = taskForm.querySelector('.task-due-date').value;
-      const priority = taskForm.querySelector('.task-priority').value;
       
-      const newTask = this.todoController.createTodo(title, description, dueDate, priority);
+      const newTask = this.todoController.createTodo(title);
       project.addTodo(newTask);
       
       this.renderAllProjects();
@@ -92,9 +85,6 @@ export default class DOMManager {
         <h3>${project.title}</h3>
         <button class="add-task-btn" type="button">Add Task</button>
       </div>
-      <p>${project.description}</p>
-      <p>Due: ${project.dueDate}</p>
-      <p>Priority: ${project.priority}</p>
       <div class="task-form-container"></div>
       <div class="todo-list">
         ${project.todoList.map(todo => `
@@ -107,7 +97,6 @@ export default class DOMManager {
         `).join('')}
       </div>
     `;
-    
     return projectElement;
   }
 
