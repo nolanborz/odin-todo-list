@@ -3,20 +3,34 @@ export default class DOMManager {
     this.todoController = todoController;
     this.projectForm = document.getElementById('new-project-form');
     this.projectsContainer = document.querySelector('.projects-container');
+    this.standaloneTaskBtn = document.querySelector('.standalone-task-form button');
+    this.standaloneTaskContainer = document.querySelector('.standalone-task-form');
     this.activeTaskForm = null;
   }
 
   initializeEventListeners() {
+    // Project form handler
     this.projectForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const title = document.getElementById('project-title').value;
-
       const newProject = this.todoController.createProject(title);
       this.renderAllProjects();
       this.projectForm.reset();
     });
 
+    // Standalone task button handler
+    this.standaloneTaskBtn.addEventListener('click', () => {
+      const taskForm = this.createTaskForm();
+      
+      // Remove any existing task form
+      const existingForm = this.standaloneTaskContainer.querySelector('.task-form');
+      if (existingForm) existingForm.remove();
+      
+      // Add new form after the button
+      this.standaloneTaskBtn.insertAdjacentElement('afterend', taskForm);
+    });
+
+    // Project add task button handler (using event delegation)
     this.projectsContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('add-task-btn')) {
         const projectElement = e.target.closest('.project');
@@ -30,7 +44,7 @@ export default class DOMManager {
     });
   }
 
-  createTaskForm(projectIndex) {
+  createTaskForm(projectIndex = null) {
     if (this.activeTaskForm) {
       this.activeTaskForm.remove();
     }
@@ -56,14 +70,29 @@ export default class DOMManager {
 
     taskForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const project = this.todoController.getProject(projectIndex);
-
       const title = taskForm.querySelector('.task-title').value;
+      const description = taskForm.querySelector('.task-description').value;
+      const dueDate = taskForm.querySelector('.task-due-date').value;
+      const priority = taskForm.querySelector('.task-priority').value;
       
-      const newTask = this.todoController.createTodo(title);
-      project.addTodo(newTask);
+      if (projectIndex !== null) {
+        // Add task to specific project
+        const project = this.todoController.getProject(projectIndex);
+        const newTask = this.todoController.createTodo(title, description, dueDate, priority);
+        console.log('New project task:', {title, description, dueDate, priority}); // Add this line
+        console.log('Task object:', newTask);
+        project.addTodo(newTask);
+        this.renderAllProjects();
+      } else {
+        // Add standalone task
+        const newTask = this.todoController.createTodo(title, description, dueDate, priority);
+        console.log('New standalone task:', {title, description, dueDate, priority}); // Add this line
+        console.log('Task object:', newTask); // And this line
+        this.todoController.addStandaloneTask(newTask);
+        this.renderStandaloneTasks();
+      }
       
-      this.renderAllProjects();
+      taskForm.remove();
       this.activeTaskForm = null;
     });
 
@@ -74,6 +103,31 @@ export default class DOMManager {
 
     this.activeTaskForm = taskForm;
     return taskForm;
+  }
+
+  renderStandaloneTasks() {
+    const tasksContainer = document.createElement('div');
+    tasksContainer.classList.add('standalone-tasks');
+    
+    this.todoController.getStandaloneTasks().forEach(task => {
+      const taskElement = document.createElement('div');
+      taskElement.classList.add('todo-item');
+      taskElement.innerHTML = `
+        <h4>${task.title}</h4>
+        <p>${task.description || ''}</p>
+        <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
+        <p>${task.priority ? `Priority: ${task.priority}` : ''}</p>
+      `;
+      tasksContainer.appendChild(taskElement);
+    });
+
+    // Replace existing tasks container if it exists
+    const existingContainer = this.standaloneTaskContainer.querySelector('.standalone-tasks');
+    if (existingContainer) {
+      existingContainer.replaceWith(tasksContainer);
+    } else {
+      this.standaloneTaskContainer.appendChild(tasksContainer);
+    }
   }
 
   renderProject(project) {
@@ -87,14 +141,14 @@ export default class DOMManager {
       </div>
       <div class="task-form-container"></div>
       <div class="todo-list">
-        ${project.todoList.map(todo => `
-          <div class="todo-item">
-            <h4>${todo.title}</h4>
-            <p>${todo.description}</p>
-            <p>Due: ${todo.dueDate}</p>
-            <p>Priority: ${todo.priority}</p>
-          </div>
-        `).join('')}
+      ${project.todoList.map(todo => `
+        <div class="todo-item">
+          <h4>${todo.title}</h4>
+          <p>${todo.description || ''}</p>
+          <p>${todo.dueDate ? `Due: ${todo.dueDate}` : ''}</p>
+          <p>${todo.priority ? `Priority: ${todo.priority}` : ''}</p>
+        </div>
+      `).join('')}
       </div>
     `;
     return projectElement;

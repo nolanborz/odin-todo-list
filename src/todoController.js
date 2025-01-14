@@ -1,10 +1,10 @@
-import Project from './todoProject.js';
 import Todo from './todo.js';
-
+import Project from './todoProject.js';
 export default class TodoController {
   constructor(name = "THE GRAND TO DO LIST") {
     this.name = name;
     this.project_array = [];
+    this.standalone_tasks = [];
   }
 
   createProject(title) {
@@ -16,7 +16,19 @@ export default class TodoController {
   createTodo(title, description, dueDate, priority) {
     return new Todo(title, description, dueDate, priority);
   }
-//Some useful functions I'll probably need
+
+  addStandaloneTask(task) {
+    this.standalone_tasks.push(task);
+  }
+
+  getStandaloneTasks() {
+    return this.standalone_tasks;
+  }
+
+  removeStandaloneTask(index) {
+    this.standalone_tasks.splice(index, 1);
+  }
+
   removeProject(index) {
     this.project_array.splice(index, 1);
   }
