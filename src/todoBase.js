@@ -6,6 +6,20 @@ export default class TodoBase {
     this.priority = priority;
     this.isComplete = false;
   }
+
+  static orderByUrgency(tasks) {
+    const priorityOrder = {
+      'urgent': 0,
+      'high': 1,
+      'medium': 2,
+      'low': 3
+    };
+
+    return tasks.sort((a, b) => {
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+  }
+  
   toggleComplete() {
     this.isComplete = !this.isComplete;
     return this.isComplete;

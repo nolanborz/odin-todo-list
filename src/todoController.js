@@ -22,6 +22,7 @@ export default class TodoController {
   }
 
   getStandaloneTasks() {
+    this.orderTasksByUrgency();
     return this.standalone_tasks;
   }
 
@@ -39,5 +40,8 @@ export default class TodoController {
 
   getAllProjects() {
     return this.project_array;
+  }
+  orderTasksByUrgency() {
+    return TodoBase.orderByUrgency(this.standalone_tasks);
   }
 }

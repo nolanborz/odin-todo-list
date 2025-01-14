@@ -15,4 +15,7 @@ export default class Project extends TodoBase {
       this.todoList.splice(index, 1);
     }
   }
+  getTodoList() {
+    return TodoBase.orderByUrgency(this.todoList);
+  }
 }

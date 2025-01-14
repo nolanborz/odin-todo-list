@@ -76,18 +76,17 @@ export default class DOMManager {
       const priority = taskForm.querySelector('.task-priority').value;
       
       if (projectIndex !== null) {
-        // Add task to specific project
         const project = this.todoController.getProject(projectIndex);
         const newTask = this.todoController.createTodo(title, description, dueDate, priority);
-        console.log('New project task:', {title, description, dueDate, priority}); // Add this line
+        console.log('New project task:', {title, description, dueDate, priority});
         console.log('Task object:', newTask);
         project.addTodo(newTask);
         this.renderAllProjects();
       } else {
         // Add standalone task
         const newTask = this.todoController.createTodo(title, description, dueDate, priority);
-        console.log('New standalone task:', {title, description, dueDate, priority}); // Add this line
-        console.log('Task object:', newTask); // And this line
+        console.log('New standalone task:', {title, description, dueDate, priority});
+        console.log('Task object:', newTask); 
         this.todoController.addStandaloneTask(newTask);
         this.renderStandaloneTasks();
       }
@@ -141,7 +140,7 @@ export default class DOMManager {
       </div>
       <div class="task-form-container"></div>
       <div class="todo-list">
-      ${project.todoList.map(todo => `
+      ${project.getTodoList().map(todo => `
         <div class="todo-item">
           <h4>${todo.title}</h4>
           <p>${todo.description || ''}</p>
