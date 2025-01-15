@@ -52,7 +52,6 @@ export default class DOMManager {
     const taskForm = document.createElement('form');
     taskForm.classList.add('task-form');
     taskForm.innerHTML = `
-      <h3>Add New Task</h3>
       <input type="text" class="task-title" placeholder="Task Title" required>
       <textarea class="task-description" placeholder="Description"></textarea>
       <input type="date" 
@@ -66,7 +65,7 @@ export default class DOMManager {
         <option value="low">Low</option>
       </select>
       <div class="task-form-buttons">
-        <button type="submit">Add Task</button>
+        <button type="submit">Submit</button>
         <button type="button" class="cancel-task">Cancel</button>
       </div>
     `;

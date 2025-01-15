@@ -37,7 +37,14 @@ body {
   background-color: #93c5fd;
 }
 
+
+
 /* Tab styles */
+
+button:hover {
+  transform: translateY(-1px);
+}
+
 .tab-buttons {
   margin-bottom: 20px;
 }
@@ -46,7 +53,8 @@ body {
   padding: 10px 20px;
   margin-right: 10px;
   border: none;
-  background: #fff;
+  border-radius: 5px;
+  background: #eeeeee;
   cursor: pointer;
 }
 
