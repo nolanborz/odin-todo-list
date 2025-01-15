@@ -36,3 +36,57 @@ body {
 .low::before {
   background-color: #93c5fd;
 }
+
+/* Tab styles */
+.tab-buttons {
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #8b5cf6;
+  color: white;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Task styles */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.task-checkbox {
+  margin-right: 8px;
+}
+
+.task-content {
+  flex-grow: 1;
+}
+
+.delete-task-btn {
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.delete-task-btn:hover {
+  color: #dc2626;
+}

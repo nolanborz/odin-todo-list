@@ -55,7 +55,10 @@ export default class DOMManager {
       <h3>Add New Task</h3>
       <input type="text" class="task-title" placeholder="Task Title" required>
       <textarea class="task-description" placeholder="Description"></textarea>
-      <input type="date" class="task-due-date">
+      <input type="date" 
+         class="task-due-date" 
+         pattern="\d{2}/\d{2}"
+         placeholder="MM/DD">
       <select class="task-priority">
         <option value="urgent">Urgent</option>
         <option value="high">High</option>
@@ -104,13 +107,51 @@ export default class DOMManager {
     return taskForm;
   }
 
-  renderTask(task) {
+  renderTask(task, isProjectTask = false, projectIndex= null) {
     const taskElement = document.createElement('div');
     taskElement.classList.add('todo-item', task.priority);
-    taskElement.innerHTML = `
+    
+    // Create checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = task.isComplete;
+    checkbox.classList.add('task-checkbox');
+    checkbox.addEventListener('change', () => {
+      task.toggleComplete();
+      // You might want to save state here
+    });
+  
+    // Create delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-task-btn');
+    deleteBtn.textContent = '×';
+    deleteBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete this task?')) {
+        if (isProjectTask && projectIndex !== null) {
+          const project = this.todoController.getProject(projectIndex);
+          project.removeTodoByTask(task);
+          this.renderAllProjects();
+        } else {
+          const taskIndex = this.todoController.standalone_tasks.indexOf(task);
+          if (taskIndex > -1) {
+            this.todoController.removeStandaloneTask(taskIndex);
+          }
+          this.renderStandaloneTasks();
+        }
+      }
+    });
+    taskElement.appendChild(checkbox);
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('task-content');
+    contentDiv.innerHTML = `
       <h4>${task.title}</h4>
-      <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
+      <p>${task.dueDate ? `Due: ${this.formatDate(task.dueDate)}` : ''}</p>
     `;
+    
+    taskElement.appendChild(contentDiv);
+    taskElement.appendChild(deleteBtn);
+    
     return taskElement;
   }
 
@@ -158,5 +199,12 @@ export default class DOMManager {
       const projectElement = this.renderProject(project);
       this.projectsContainer.appendChild(projectElement);
     });
+  }
+
+  formatDate(date) {
+    const d = new Date(date);
+    const month = d.toLocaleString('default', { month: 'short' });
+    const day = d.getDate();
+    return `${month} ${day}`;
   }
 }

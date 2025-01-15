@@ -7,21 +7,32 @@
 </head>
   <body>
     <h1>Get it Done</h1>
-    <div id="container">
-      <div class="standalone-task-form">
-        <h2>Standalone Tasks</h2>
-        <button>Add task</button>
-      </div>
-      <div class="project-form">
-        <h2>Create Project</h2>
-        <form id="new-project-form">
-          <input type="text" id="project-title" name="project-title" placeholder="Project Title" required>
-          <button type="submit">Create Project</button>
-        </form>
-      </div>
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="standalone">Standalone Tasks</button>
+      <button class="tab-btn" data-tab="projects">Projects</button>
     </div>
-    <div class="projects-container">
-      <!-- Projects will be rendered here -->
+    <div class="tab-content">
+      <!-- Standalone tasks tab -->
+      <div id="standalone" class="tab-panel active">
+        <div class="standalone-task-form">
+          <h2>Standalone Tasks</h2>
+          <button>Add task</button>
+        </div>
+      </div>
+  
+      <!-- Projects tab -->
+      <div id="projects" class="tab-panel">
+        <div class="project-form">
+          <h2>Create Project</h2>
+          <form id="new-project-form">
+            <input type="text" id="project-title" name="project-title" placeholder="Project Title" required>
+            <button type="submit">Create Project</button>
+          </form>
+        </div>
+        <div class="projects-container">
+          <!-- Projects will be rendered here -->
+        </div>
+      </div>
     </div>
   </body>
 </html>
