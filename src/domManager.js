@@ -104,21 +104,24 @@ export default class DOMManager {
     return taskForm;
   }
 
+  renderTask(task) {
+    const taskElement = document.createElement('div');
+    taskElement.classList.add('todo-item', task.priority);
+    taskElement.innerHTML = `
+      <h4>${task.title}</h4>
+      <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
+    `;
+    return taskElement;
+  }
+
   renderStandaloneTasks() {
     const tasksContainer = document.createElement('div');
     tasksContainer.classList.add('standalone-tasks');
     
     this.todoController.getStandaloneTasks().forEach(task => {
-      const taskElement = document.createElement('div');
-      taskElement.classList.add('todo-item', task.priority);
-      taskElement.innerHTML = `
-        <h4>${task.title}</h4>
-        <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
-      `;
-      tasksContainer.appendChild(taskElement);
+      tasksContainer.appendChild(this.renderTask(task));
     });
 
-    // Replace existing tasks container if it exists
     const existingContainer = this.standaloneTaskContainer.querySelector('.standalone-tasks');
     if (existingContainer) {
       existingContainer.replaceWith(tasksContainer);
@@ -137,15 +140,15 @@ export default class DOMManager {
         <button class="add-task-btn" type="button">Add Task</button>
       </div>
       <div class="task-form-container"></div>
-      <div class="todo-list">
-      ${project.getTodoList().map(todo => `
-        <div class="todo-item ${todo.priority}">
-          <h4>${todo.title}</h4>
-          <p>${todo.dueDate ? `Due: ${todo.dueDate}` : ''}</p>
-        </div>
-      `).join('')}
-      </div>
+      <div class="todo-list"></div>
     `;
+  
+    // Add tasks to the todo-list container
+    const todoList = projectElement.querySelector('.todo-list');
+    project.getTodoList().forEach(todo => {
+      todoList.appendChild(this.renderTask(todo));
+    });
+  
     return projectElement;
   }
 
