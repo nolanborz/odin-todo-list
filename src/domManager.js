@@ -113,9 +113,7 @@ export default class DOMManager {
       taskElement.classList.add('todo-item');
       taskElement.innerHTML = `
         <h4>${task.title}</h4>
-        <p>${task.description || ''}</p>
         <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
-        <p>${task.priority ? `Priority: ${task.priority}` : ''}</p>
       `;
       tasksContainer.appendChild(taskElement);
     });
@@ -143,9 +141,7 @@ export default class DOMManager {
       ${project.getTodoList().map(todo => `
         <div class="todo-item">
           <h4>${todo.title}</h4>
-          <p>${todo.description || ''}</p>
           <p>${todo.dueDate ? `Due: ${todo.dueDate}` : ''}</p>
-          <p>${todo.priority ? `Priority: ${todo.priority}` : ''}</p>
         </div>
       `).join('')}
       </div>
