@@ -6,16 +6,16 @@ body {
   padding-left: 3rem;
 }
 
-
 .todo-item {
   display: flex;
   align-items: center;
   max-width: 50%;
   min-width: 30%;
-  padding: 12px;
+  padding: 8px;
   margin: 8px 0;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
+  gap: 12px;
 }
 
 .todo-item::before {
@@ -42,9 +42,6 @@ body {
 .low::before {
   background-color: #93c5fd;
 }
-
-
-
 /* Tab styles */
 
 button:hover {
@@ -77,12 +74,6 @@ button:hover {
   display: block;
 }
 
-/* Task styles */
-.todo-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 
 .task-checkbox {
   margin-right: 8px;
@@ -96,21 +87,24 @@ button:hover {
   flex-direction: row;
 }
 
-.delete-task-btn {
-  padding: 4px 8px;
-  background: none;
-  border: none;
-  color: #ef4444;
+button.delete-task-btn {
+  background: none !important;
+  border: none !important;
+  color: #ef4444 !important; /* Forces the red color */
   font-size: 18px;
+  padding: 4px 8px;
   cursor: pointer;
+  font-weight: normal;
 }
 
-.delete-task-btn:hover {
-  color: #dc2626;
+button.delete-task-btn:hover {
+  color: #dc2626 !important; /* Forces the darker red on hover */
 }
 
 .standalone-task-form button,
-#new-project-form button, .task-form-buttons button, .add-task-btn {
+#new-project-form button, 
+.task-form-buttons button, 
+.add-task-btn {
   background-color: #8b5cf6;
   padding: 8px 16px;
   font-weight: 500;
