@@ -110,7 +110,7 @@ export default class DOMManager {
     
     this.todoController.getStandaloneTasks().forEach(task => {
       const taskElement = document.createElement('div');
-      taskElement.classList.add('todo-item');
+      taskElement.classList.add('todo-item', task.priority);
       taskElement.innerHTML = `
         <h4>${task.title}</h4>
         <p>${task.dueDate ? `Due: ${task.dueDate}` : ''}</p>
@@ -139,7 +139,7 @@ export default class DOMManager {
       <div class="task-form-container"></div>
       <div class="todo-list">
       ${project.getTodoList().map(todo => `
-        <div class="todo-item">
+        <div class="todo-item ${todo.priority}">
           <h4>${todo.title}</h4>
           <p>${todo.dueDate ? `Due: ${todo.dueDate}` : ''}</p>
         </div>
