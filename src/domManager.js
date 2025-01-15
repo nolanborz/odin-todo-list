@@ -145,7 +145,7 @@ export default class DOMManager {
     contentDiv.classList.add('task-content');
     contentDiv.innerHTML = `
       <h4>${task.title}</h4>
-      <p>${task.dueDate ? `Due: ${this.formatDate(task.dueDate)}` : ''}</p>
+      <p>${task.dueDate ? `${this.formatDate(task.dueDate)}` : ''}</p>
     `;
     
     taskElement.appendChild(contentDiv);

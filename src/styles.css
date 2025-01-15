@@ -1,11 +1,17 @@
 body {
   background-color: rgb(227, 200, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 3rem;
 }
 
 
 .todo-item {
   display: flex;
   align-items: center;
+  max-width: 50%;
+  min-width: 30%;
   padding: 12px;
   margin: 8px 0;
   border: 1px solid #e5e7eb;
@@ -84,6 +90,10 @@ button:hover {
 
 .task-content {
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .delete-task-btn {
@@ -97,4 +107,37 @@ button:hover {
 
 .delete-task-btn:hover {
   color: #dc2626;
+}
+
+.standalone-task-form button,
+#new-project-form button, .task-form-buttons button, .add-task-btn {
+  background-color: #8b5cf6;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+  color: white;
+}
+
+.task-form {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 16px 0;
+  width: 50%;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+/* Checkbox styling */
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #8b5cf6;
 }
