@@ -12,4 +12,5 @@ const tabManager = new TabManager();
 
 domManager.initializeEventListeners();
 domManager.renderAllProjects();
+domManager.renderStandaloneTasks();
 

@@ -113,7 +113,7 @@ export default class DOMManager {
     // Create checkbox
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.checked = task.isComplete;
+    checkbox.checked = task.isComplete || false;
     checkbox.classList.add('task-checkbox');
     checkbox.addEventListener('change', () => {
       task.toggleComplete();
@@ -170,7 +170,7 @@ export default class DOMManager {
     }
   }
 
-  renderProject(project) {
+  renderProject(project, projectIndex) {
     const projectElement = document.createElement('div');
     projectElement.classList.add('project');
     
@@ -186,7 +186,7 @@ export default class DOMManager {
     // Add tasks to the todo-list container
     const todoList = projectElement.querySelector('.todo-list');
     project.getTodoList().forEach(todo => {
-      todoList.appendChild(this.renderTask(todo));
+      todoList.appendChild(this.renderTask(todo, true, projectIndex));
     });
   
     return projectElement;
@@ -194,8 +194,8 @@ export default class DOMManager {
 
   renderAllProjects() {
     this.projectsContainer.innerHTML = '';
-    this.todoController.getAllProjects().forEach(project => {
-      const projectElement = this.renderProject(project);
+    this.todoController.getAllProjects().forEach((project, index) => {
+      const projectElement = this.renderProject(project, index);
       this.projectsContainer.appendChild(projectElement);
     });
   }

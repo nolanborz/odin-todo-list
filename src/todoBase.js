@@ -1,10 +1,11 @@
 export default class TodoBase {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, controller) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.isComplete = false;
+    this.controller = controller;
   }
 
   static orderByUrgency(tasks) {
@@ -22,6 +23,9 @@ export default class TodoBase {
   
   toggleComplete() {
     this.isComplete = !this.isComplete;
+    if (this.controller) {
+      this.controller.saveData();
+    }
     return this.isComplete;
   }
   setDueDate(newDate) {
