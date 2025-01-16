@@ -1,9 +1,14 @@
 body {
   background-color: rgb(227, 200, 255);
+  font-family: "Roboto Mono", monospace;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 3rem;
+}
+
+button {
+  font-family: "Roboto Mono", monospace;
 }
 
 .todo-item {
@@ -134,4 +139,91 @@ button.delete-task-btn:hover {
   width: 18px;
   height: 18px;
   accent-color: #8b5cf6;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1rem; /* Reduce padding on mobile */
+    padding-bottom: 2rem;
+    align-items: center; /* Center content */
+  }
+
+  /* Adjust task width for mobile */
+  .todo-item {
+    max-width: 90%;
+    min-width: 90%;
+    margin: 8px auto;
+  }
+
+  /* Prevent task content from squishing */
+  .task-content {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .task-content h4 {
+    width: 100%; /* Make title take full width */
+    margin: 0;
+  }
+
+  .task-content p {
+    margin: 0;
+  }
+
+  /* Adjust form width for mobile */
+  .task-form {
+    width: 90%;
+  }
+
+  /* Make tab buttons stack better on mobile */
+  .tab-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    margin: 0 auto 20px auto;
+  }
+
+  .tab-btn {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  /* Center headings */
+  h1, h2 {
+    text-align: center;
+  }
+
+  /* Adjust project form for mobile */
+  #new-project-form {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #new-project-form input,
+  #new-project-form button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .todo-item {
+    padding: 12px;
+  }
+
+  /* Make delete button easier to tap */
+  button.delete-task-btn {
+    padding: 8px 12px;
+  }
+
+  /* Increase form element spacing */
+  .task-form input,
+  .task-form textarea,
+  .task-form select {
+    margin-bottom: 16px;
+    padding: 8px;
+  }
 }
