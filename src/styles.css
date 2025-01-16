@@ -180,7 +180,7 @@ button.delete-task-btn:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 90%;
+    width: 200px;
     margin: 0 auto 20px auto;
   }
 
@@ -214,6 +214,11 @@ button.delete-task-btn:hover {
     padding: 12px;
   }
 
+  .task-title, .task-description, .task-due-date, .task-priority {
+    max-width: 90%;
+
+  }
+
   /* Make delete button easier to tap */
   button.delete-task-btn {
     padding: 8px 12px;
@@ -227,3 +232,24 @@ button.delete-task-btn:hover {
     padding: 8px;
   }
 }
+
+
+.project-header {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-wrapper h3 {
+  margin: 0;
+}
+
+/* The delete button styling is already handled by your existing .delete-task-btn class */

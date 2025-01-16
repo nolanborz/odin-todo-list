@@ -174,19 +174,56 @@ export default class DOMManager {
     const projectElement = document.createElement('div');
     projectElement.classList.add('project');
     
-    projectElement.innerHTML = `
-      <div class="project-header">
-        <h3>${project.title}</h3>
-        <button class="add-task-btn" type="button">Add Task</button>
-      </div>
-      <div class="task-form-container"></div>
-      <div class="todo-list"></div>
-    `;
+    // Create header
+    const headerDiv = document.createElement('div');
+    headerDiv.classList.add('project-header');
+    
+    // Create title wrapper
+    const titleWrapper = document.createElement('div');
+    titleWrapper.classList.add('title-wrapper');
+    
+    // Create title
+    const title = document.createElement('h3');
+    title.textContent = project.title;
+    
+    // Create delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-task-btn');
+    deleteBtn.textContent = '×';
+    deleteBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete this project and all its tasks?')) {
+        this.todoController.removeProject(projectIndex);
+        this.renderAllProjects();
+      }
+    });
+    
+    // Create add task button
+    const addTaskBtn = document.createElement('button');
+    addTaskBtn.classList.add('add-task-btn');
+    addTaskBtn.textContent = 'Add Task';
+    addTaskBtn.type = 'button';
   
-    // Add tasks to the todo-list container
-    const todoList = projectElement.querySelector('.todo-list');
+    // Create containers for form and tasks
+    const formContainer = document.createElement('div');
+    formContainer.classList.add('task-form-container');
+    
+    const todoListContainer = document.createElement('div');
+    todoListContainer.classList.add('todo-list');
+  
+    // Build the structure
+    titleWrapper.appendChild(title);
+    titleWrapper.appendChild(deleteBtn);
+    
+    headerDiv.appendChild(titleWrapper);
+    headerDiv.appendChild(addTaskBtn);
+    
+    projectElement.appendChild(headerDiv);
+    projectElement.appendChild(formContainer);
+    projectElement.appendChild(todoListContainer);
+  
+    // Add tasks
     project.getTodoList().forEach(todo => {
-      todoList.appendChild(this.renderTask(todo, true, projectIndex));
+      todoListContainer.appendChild(this.renderTask(todo, true, projectIndex));
     });
   
     return projectElement;
