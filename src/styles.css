@@ -24,7 +24,7 @@ button {
 }
 
 .todo-item::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 12px;
   height: 12px;
@@ -79,7 +79,6 @@ button:hover {
   display: block;
 }
 
-
 .task-checkbox {
   margin-right: 8px;
 }
@@ -107,8 +106,8 @@ button.delete-task-btn:hover {
 }
 
 .standalone-task-form button,
-#new-project-form button, 
-.task-form-buttons button, 
+#new-project-form button,
+.task-form-buttons button,
 .add-task-btn {
   background-color: #8b5cf6;
   padding: 8px 16px;
@@ -190,7 +189,8 @@ button.delete-task-btn:hover {
   }
 
   /* Center headings */
-  h1, h2 {
+  h1,
+  h2 {
     text-align: center;
   }
 
@@ -214,9 +214,11 @@ button.delete-task-btn:hover {
     padding: 12px;
   }
 
-  .task-title, .task-description, .task-due-date, .task-priority {
+  .task-title,
+  .task-description,
+  .task-due-date,
+  .task-priority {
     max-width: 90%;
-
   }
 
   /* Make delete button easier to tap */
@@ -232,7 +234,6 @@ button.delete-task-btn:hover {
     padding: 8px;
   }
 }
-
 
 .project-header {
   display: grid;
